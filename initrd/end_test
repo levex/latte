@@ -1,0 +1,14 @@
+#!/bin/sh
+
+echo "Test finished with $1"
+
+if [ $1 -eq 0 ]
+then
+	echo "TEST_SUCCESS"
+	echo o > /proc/sysrq-trigger
+	exit
+fi
+
+echo "TEST_FAILURE"
+
+echo o > /proc/sysrq-trigger

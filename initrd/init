@@ -1,0 +1,24 @@
+#!/bin/sh
+
+echo "Mounting procfs"
+
+mount -t proc proc /proc
+
+echo "Mounting sysfs"
+mount -t sysfs sysfs /sys
+
+echo "Creating a few devices"
+mknod /dev/null c 1 3
+mknod /dev/tty c 5 0
+mdev -s
+
+echo "Setting up basic environment"
+busybox --install -s
+
+echo "Executing test"
+# just to be sure...
+chmod +x /test
+chmod +x /end_test
+sh /test > /dev/kmsg
+sh /end_test $? > /dev/kmsg
+tail -f /dev/null

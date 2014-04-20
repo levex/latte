@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Qemu to use
+QEMU=qemu-system-x86_64
+
+# Options to pass to Qemu
+QEMU_OPTS=( -net nic,model=ne2k_pci
+			-net user
+			)
+
+# Minimal options to pass to the kernel
+KERNEL_BASE_OPTS=( console=ttyS0,9600
+				   console=tty0
+				  )
+
+LOGFORMAT="+%m%d%y%H%M%S"
+
+# say yes if you forwarded the kernel's output to serial
+# via kernel parameter: console=ttyS0,9600
+# this will allow the tester to check for errors inside
+# the dmesg
+KERNEL_SERIAL=yes
+
+# tests to execute
+TESTS=( boot_test.sh
+		)
