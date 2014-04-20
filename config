@@ -23,4 +23,5 @@ KERNEL_SERIAL=yes
 
 # tests to execute
 TESTS=( boot_test.sh
+		cat_test.sh
 		)
